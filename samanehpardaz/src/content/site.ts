@@ -11,6 +11,7 @@ export const site: SiteConfig = {
   logo: '/brand/logo-company.webp',
   social: null,
   skipToContentLabel: 'پرش به محتوا',
+  breadcrumbLabel: 'مسیر صفحه',
   footer: {
     copyright: '© {year} سامانه پرداز ایرانیان جوان',
     navigationTitle: 'دسترسی سریع',

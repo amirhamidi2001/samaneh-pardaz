@@ -30,6 +30,8 @@ export type SiteConfig = {
   logo: string | null
   social: SocialLink[] | null
   skipToContentLabel: string
+  /** برچسب دسترسی‌پذیری برای مسیر صفحه (breadcrumb) */
+  breadcrumbLabel: string
   footer: {
     /** از {year} برای سال شمسی استفاده کنید */
     copyright: string

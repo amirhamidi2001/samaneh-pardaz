@@ -9,37 +9,137 @@
   font-display: swap;
 }
 
-/* توکن‌های طراحی؛ برای کل سایت (و محصول Hirbad) یکسان */
+/* توکن‌های طراحی؛ منبع حقیقت: DESIGN_SPEC.md */
 @theme {
   --font-sans: "Vazirmatn", ui-sans-serif, system-ui, "Segoe UI", Tahoma, sans-serif;
 
-  --color-brand: #020617;
-  --color-accent: #082f49;
-  --color-accent-strong: #0c4a6e;
-  --color-accent-soft: #e0f2fe;
-  --color-surface: #f0f9ff;
-  --color-surface-alt: #f8fafc;
-  --color-muted: #0c0a09;
-  --color-border: #bae6fd;
+  /* پالت: سرمه‌ای عمیق + آبی رویال لوگو + آبی روشن */
+  --color-navy-950: #06142e;
+  --color-navy-900: #0a1f47;
+  --color-navy-800: #0e2c63;
+  --color-navy-700: #123b82;
+  --color-royal-600: #1f4fd8;
+  --color-royal-700: #173fae;
+  --color-mist-50: #f6faff;
+  --color-mist-100: #eaf3ff;
+  --color-mist-200: #d9e6f7;
+  --color-mist-300: #b3d3f7;
+  --color-mist-400: #7fb4f0;
 
-  --radius-card: 1rem;
-  --radius-control: 0.75rem;
+  /* نام‌های معنایی (سازگار با نام‌های قبلی پروژه) */
+  --color-brand: var(--color-navy-950);
+  --color-accent: var(--color-royal-600);
+  --color-accent-strong: var(--color-royal-700);
+  --color-accent-soft: var(--color-mist-100);
+  --color-surface: #ffffff;
+  --color-surface-alt: var(--color-mist-50);
+  --color-muted: #51627d;
+  --color-border: var(--color-mist-200);
 
-  --shadow-soft: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 16px rgb(15 23 42 / 0.06);
-  --shadow-lifted: 0 2px 4px rgb(15 23 42 / 0.05), 0 12px 32px rgb(15 23 42 / 0.1);
+  --radius-card: 1.5rem;
+  --radius-control: 0.875rem;
+
+  --shadow-soft: 0 1px 2px rgb(6 20 46 / 0.04), 0 8px 24px -10px rgb(6 20 46 / 0.1);
+  --shadow-lifted: 0 2px 4px rgb(6 20 46 / 0.05), 0 28px 48px -20px rgb(14 44 99 / 0.28);
+
+  /* حرکت: فقط برای توالی ورود هیرو */
+  --animate-rise: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-pop: pop 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+  --animate-draw: draw 0.9s ease-out both;
+  --animate-fade: fade 1.2s ease-out both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      translate: 0 18px;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+  @keyframes pop {
+    from {
+      opacity: 0;
+      scale: 0.7;
+    }
+    to {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+  @keyframes draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+/* بافت شبکه‌ای ظریف (باید روی عنصر تزئینیِ جدا اعمال شود چون mask دارد) */
+@utility bg-grid-dark {
+  background-image:
+    linear-gradient(to right, rgb(179 211 247 / 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(179 211 247 / 0.09) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, #000 30%, transparent 80%);
+}
+
+@utility bg-grid-light {
+  background-image:
+    linear-gradient(to right, rgb(18 59 130 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(18 59 130 / 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 80% at 50% 0%, #000 20%, transparent 75%);
+}
+
+/* ظاهرشدن کارت‌ها هنگام اسکرول؛ بهبود تدریجی بدون JS (در مرورگرهای ناپشتیبان محتوا همیشه دیده می‌شود) */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    translate: 0 28px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
 }
 
 @layer base {
   html {
     font-size: 16px;
     -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
   }
 
   body {
     font-family: var(--font-sans);
-    background-color: var(--color-surface-alt);
+    background-color: #fff;
     color: var(--color-brand);
-    line-height: 1.8;
+    line-height: 1.85;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   *,
@@ -48,18 +148,32 @@
     border-color: var(--color-border);
   }
 
+  ::selection {
+    background: var(--color-mist-300);
+    color: var(--color-navy-950);
+  }
+
   :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 3px;
-    border-radius: 0.25rem;
+    border-radius: 0.375rem;
+  }
+
+  /* روی پس‌زمینه تیره، حلقه فوکوس روشن */
+  .on-dark :focus-visible {
+    outline-color: var(--color-mist-300);
   }
 
   @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
     *,
     ::after,
     ::before {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
+      animation-delay: 0s !important;
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
