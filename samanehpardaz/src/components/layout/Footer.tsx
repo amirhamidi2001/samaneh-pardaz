@@ -5,11 +5,13 @@ import { Logo } from '@/components/ui/Logo'
 import { navigation } from '@/content/navigation'
 import { site } from '@/content/site'
 import { formatCopyright, formatPhone, toTelHref } from '@/lib/format'
+import { useEmail } from '@/lib/useEmail'
 
 const linkClasses = 'text-slate-300 transition-colors hover:text-white'
 const titleClasses = 'mb-4 text-base font-bold text-white'
 
 export function Footer() {
+  const email = useEmail()
   const hasContact = site.phones.length > 0 || site.email !== null || site.region !== null
 
   return (
@@ -44,11 +46,11 @@ export function Footer() {
                   </a>
                 </li>
               ))}
-              {site.email ? (
+              {email ? (
                 <li className="flex items-center gap-2">
                   <Icon name="mail" />
-                  <a href={`mailto:${site.email}`} className={linkClasses}>
-                    {site.email}
+                  <a href={`mailto:${email}`} className={linkClasses}>
+                    {email}
                   </a>
                 </li>
               ) : null}
