@@ -1,205 +1,59 @@
-# Samaneh Pardaz Iranian Javan — Corporate Website
+# وب‌سایت شرکتی سامانه پرداز ایرانیان جوان
 
-The official corporate website for **Samaneh Pardaz Iranian Javan**, an Iranian company working in information technology, education, and digital services.
+React + Vite + TypeScript + Tailwind CSS 4 + react-router-dom 6 + vite-react-ssg (prerender).
+بدون Backend و دیتابیس؛ تمام محتوا در `src/content/`.
 
-- **Live website:** https://samanehpardaz.vercel.app/
-- **Featured product:** [Hirbad](https://hirbad.com)
+## دستورها
 
-## Overview
+- `npm install` نصب وابستگی‌ها
+- `npm run dev` اجرای محیط توسعه
+- `npm run build` ساخت نسخه نهایی با prerender در پوشه `dist/`
+- `npm run preview` پیش‌نمایش خروجی ساخته‌شده
+- `npm run lint` بررسی کد (oxlint)
 
-This project is a Persian, right-to-left (RTL), responsive corporate website. It presents the company, its areas of activity, its products, and contact information.
+## دیپلوی روی Vercel
 
-The application is frontend-only: it has no backend or database. Website content and configuration are maintained in the `src/content/` directory.
+پروژه یک سایت کاملاً استاتیک است؛ هر مسیر هنگام build به یک فایل HTML جدا تبدیل می‌شود
+(`about.html`، `products/hirbad.html`، `404.html` و ...). تنظیمات در `vercel.json` است:
 
-## Website pages
+- **Framework Preset:** Vite
+- **Build Command:** `npm run build` ← **حتماً این، نه `vite build`**. دستور پیش‌فرض preset ویت prerender ندارد
+  و فقط یک `index.html` خالی می‌سازد. `vercel.json` این مقدار را تنظیم کرده است.
+- **Output Directory:** `dist`
+- `cleanUrls: true` و `trailingSlash: false` مسیر `/about` را از `about.html` سرو می‌کنند
+  (هم‌خوان با canonical بدون اسلش پایانی) و مسیر ناشناخته `404.html` را برمی‌گرداند.
+- فایل‌های `/assets/*` هدر کش `immutable` می‌گیرند (نام‌شان hash دارد).
 
-| Route | Description |
+اگر بعداً به‌جای Vercel از هاست استاتیک دیگری استفاده کردید، باید همین رفتار را تنظیم کنید:
+`/about` ← `about.html` و صفحه `404.html` برای مسیرهای ناشناخته.
+
+## فایل‌هایی که مالک باید اضافه کند
+
+تا وقتی این فایل‌ها نیستند، سایت به آن‌ها ارجاع نمی‌دهد (و نام شرکت به‌صورت متنی نمایش داده می‌شود):
+
+| فایل | توضیح |
 |---|---|
-| `/` | Company homepage |
-| `/about` | About the company |
-| `/services` | Services and areas of activity |
-| `/products` | Products and platforms |
-| `/products/hirbad` | Hirbad product details |
-| `/contact` | Contact information |
-| Not found | Custom 404 page |
+| `public/favicon.svg` | وقتی اضافه شود، لینک favicon خودکار در `<head>` همه صفحات می‌آید. تا آن موقع یک favicon خالی گذاشته می‌شود (تب مرورگر بدون آیکون) تا مرورگر `/favicon.ico` را نخواهد و خطای ۴۰۴ در کنسول نبیند. |
+| `public/og-image.png` | تصویر پیش‌نمایش اشتراک‌گذاری، ۱۲۰۰×۶۳۰. وقتی اضافه شود `og:image` و `twitter:image` خودکار ساخته می‌شود. |
+| `public/brand/logo-company.svg` | سپس در `src/content/site.ts` مقدار `logo` را به `'/brand/logo-company.svg'` تغییر دهید. |
+| `public/brand/logo-hirbad.svg` | سپس در `src/content/products.ts` برای هیربد `logo: '/brand/logo-hirbad.svg'` بگذارید. |
 
-## Company activities
+برای لوگو بهتر است SVG با `viewBox` درست بدهید تا ابعاد آن بدون پرش چیدمان محاسبه شود.
 
-The website currently presents these areas:
+## افزودن محصول جدید
 
-- Information technology education and research
-- Online academic education and private tutoring
-- Specialized information systems
-- Information technology support
+۱. یک آبجکت به آرایه `products` در `src/content/products.ts` اضافه کنید.
+   کارت محصول، صفحه `/products/<slug>`، لینک فوتر و فایل HTML prerender خودکار ساخته می‌شود.
+۲. آدرس صفحه جدید را **دستی** به `public/sitemap.xml` اضافه کنید.
 
-## Product
+## تغییر دامنه
 
-### Hirbad
+اگر دامنه اختصاصی گرفتید، این‌ها را عوض کنید: `siteUrl` در `src/content/site.ts`،
+همه `<loc>`ها در `public/sitemap.xml` و خط `Sitemap:` در `public/robots.txt`.
+canonicalها، `og:url` و JSON-LD از `siteUrl` ساخته می‌شوند.
 
-[Hirbad](https://hirbad.com) is an online learning platform that connects learners with specialized, verified teachers and supports private and group online lessons.
+## سئو
 
-The website's product page introduces its audience, key features, and the steps for getting started.
-
-## Technology stack
-
-- **React 19** — UI library
-- **TypeScript** — static typing
-- **Vite** — development server and build tooling
-- **Tailwind CSS 4** — styling
-- **React Router 6** — client-side routing
-- **vite-react-ssg** — static site generation and route prerendering
-- **oxlint** — code linting
-
-## Requirements
-
-- Node.js (use a current version compatible with the installed Vite release)
-- npm
-
-## Installation
-
-```bash
-npm install
-```
-
-## Development
-
-Start the local development server:
-
-```bash
-npm run dev
-```
-
-Vite will print the local URL in the terminal.
-
-## Available scripts
-
-| Command | Description |
-|---|---|
-| `npm run dev` | Start the development server |
-| `npm run build` | Run TypeScript project checks and generate the production site |
-| `npm run preview` | Preview the production build locally |
-| `npm run lint` | Run Oxlint |
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-The generated static website is written to `dist/`.
-
-Preview the production build:
-
-```bash
-npm run preview
-```
-
-Run linting:
-
-```bash
-npm run lint
-```
-
-## Project structure
-
-```text
-samanehpardaz/
-├── public/
-│   ├── brand/              # Company and product logos
-│   ├── favicon.svg
-│   ├── og-image.png
-│   ├── robots.txt
-│   └── sitemap.xml
-├── src/
-│   ├── assets/
-│   │   └── fonts/          # Local font files
-│   ├── components/
-│   │   ├── layout/         # Header, footer and shared page layout
-│   │   ├── sections/       # Page and product sections
-│   │   ├── seo/            # Metadata and structured data
-│   │   └── ui/             # Reusable UI components
-│   ├── content/            # Centralized site text, data and configuration
-│   ├── lib/                # Shared utilities
-│   ├── pages/              # Route-level page components
-│   ├── index.css
-│   └── main.tsx
-├── index.html
-├── package.json
-├── tsconfig*.json
-├── vercel.json
-└── vite.config.ts
-```
-
-## Managing website content
-
-Most website text and business information can be updated without changing page components. The central content files are:
-
-| File | Purpose |
-|---|---|
-| `src/content/site.ts` | Company name, canonical site URL, contact details, logo and shared site settings |
-| `src/content/home.ts` | Homepage content |
-| `src/content/about.ts` | About page content |
-| `src/content/services.ts` | Services page and service descriptions |
-| `src/content/products.ts` | Product listing and product details |
-| `src/content/contact.ts` | Contact page content |
-| `src/content/navigation.ts` | Navigation items |
-| `src/content/types.ts` | Shared content types |
-
-### Updating company information
-
-Edit `src/content/site.ts` to update the company name, website URL, phone numbers, email address, region, or company logo.
-
-Contact information is sourced from this central configuration and reused by the contact page and shared layout.
-
-### Adding a product
-
-1. Add a product object to the `products` array in `src/content/products.ts`.
-2. Provide a unique `slug`, name, summary, audience, features, steps, external URL, and any applicable logo/status fields.
-3. The product listing and detail route are generated from the product data.
-4. Add the new public URL to `public/sitemap.xml`.
-
-### Updating static assets
-
-Place public assets in `public/`. Company and product brand assets belong in `public/brand/`.
-
-When changing the canonical domain, update `siteUrl` in `src/content/site.ts`, the URLs in `public/sitemap.xml`, and the sitemap reference in `public/robots.txt`.
-
-## Static generation and Vercel deployment
-
-The project uses `vite-react-ssg` to prerender the website routes into static HTML files during the production build.
-
-The repository includes `vercel.json` with the deployment configuration:
-
-- **Framework preset:** Vite
-- **Build command:** `npm run build`
-- **Output directory:** `dist`
-- **Clean URLs:** enabled
-- **Trailing slash:** disabled
-
-**Important:** Use `npm run build` as the Vercel build command. Do not replace it with `vite build`, because the project build script also runs TypeScript checks and the static-generation process.
-
-For another static hosting provider, configure clean URL handling so routes such as `/about` resolve to their generated HTML files, and configure the generated 404 page as the not-found response.
-
-## SEO and accessibility
-
-The project includes:
-
-- Page-specific title and description metadata
-- Canonical URLs
-- Open Graph and Twitter metadata
-- Organization structured data on the homepage
-- A `noindex` not-found page
-- A skip-to-content link
-- Persian language and RTL document direction
-
-The sitemap and robots directives are maintained in `public/sitemap.xml` and `public/robots.txt`.
-
-## Notes
-
-- This is a static frontend project; there is no application backend or database.
-- Website copy and company descriptions are maintained in `src/content/`.
-- Review draft or owner-confirmation comments in the content files before treating those descriptions as final corporate statements.
-
-## License
-
-Refer to the repository's `LICENSE` file.
+- هر صفحه title، description، canonical و تگ‌های Open Graph/Twitter اختصاصی دارد (کامپوننت `Seo`).
+- JSON-LD نوع `Organization` فقط در صفحه اصلی است و فقط فیلدهای غیر `null` را می‌گذارد.
+- صفحه ۴۰۴ `noindex` است و canonical ندارد.
