@@ -8,8 +8,7 @@ export const site: SiteConfig = {
   region: 'استان تهران',
   addressRegion: 'تهران',
   addressCountry: 'IR',
-  // بعد از افزودن فایل به public/brand/ مقدار را به '/brand/logo-company.svg' تغییر دهید
-  logo: null,
+  logo: '/brand/logo-company.webp',
   social: null,
   skipToContentLabel: 'پرش به محتوا',
   footer: {

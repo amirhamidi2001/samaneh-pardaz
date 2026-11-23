@@ -4,11 +4,13 @@ import { Section } from '@/components/ui/Section'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { contactInfo, contactPage } from '@/content/contact'
 import { formatPhone, toTelHref } from '@/lib/format'
+import { useEmail } from '@/lib/useEmail'
 
 export function ContactPage() {
-  const { phones, email, region } = contactInfo
+  const { phones, region } = contactInfo
+  const email = useEmail()
   const { labels } = contactPage
-  const hasAny = phones.length > 0 || email !== null || region !== null
+  const hasAny = phones.length > 0 || contactInfo.email !== null || region !== null
 
   return (
     <>
@@ -27,13 +29,13 @@ export function ContactPage() {
                 />
               </li>
             ))}
-            {email ? (
+            {contactInfo.email ? (
               <li>
                 <ContactItem
                   icon="mail"
                   label={labels.email}
-                  value={email}
-                  href={`mailto:${email}`}
+                  value={email ?? '…'}
+                  href={email ? `mailto:${email}` : undefined}
                   ltr
                 />
               </li>

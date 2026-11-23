@@ -9,10 +9,16 @@ type LogoProps = {
 
 export function Logo({ src, name, className = '', lazy = false }: LogoProps) {
   if (src) {
+    // نسخه‌های ۴۰/۸۰/۱۲۰ پیکسلی کنار فایل اصلی ساخته شده‌اند (logo-x-40.webp و ...)
+    // تا مرورگر به‌جای تصویر بزرگ، اندازهٔ متناسب با نمایش را دانلود کند
+    const base = src.replace(/\.webp$/, '')
     return (
       <img
-        src={src}
+        src={`${base}-80.webp`}
+        srcSet={`${base}-40.webp 40w, ${base}-80.webp 80w, ${base}-120.webp 120w`}
+        sizes="40px"
         alt={name}
+        width={40}
         height={40}
         decoding="async"
         loading={lazy ? 'lazy' : 'eager'}

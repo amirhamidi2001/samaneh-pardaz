@@ -3,14 +3,15 @@ import { Container } from '@/components/ui/Container'
 import { Icon } from '@/components/ui/Icon'
 import { Logo } from '@/components/ui/Logo'
 import { navigation } from '@/content/navigation'
-import { products } from '@/content/products'
 import { site } from '@/content/site'
 import { formatCopyright, formatPhone, toTelHref } from '@/lib/format'
+import { useEmail } from '@/lib/useEmail'
 
 const linkClasses = 'text-slate-300 transition-colors hover:text-white'
 const titleClasses = 'mb-4 text-base font-bold text-white'
 
 export function Footer() {
+  const email = useEmail()
   const hasContact = site.phones.length > 0 || site.email !== null || site.region !== null
 
   return (
@@ -31,20 +32,6 @@ export function Footer() {
               </li>
             ))}
           </ul>
-          {products.length > 0 ? (
-            <>
-              <h2 className={`${titleClasses} mt-8`}>{site.footer.productsTitle}</h2>
-              <ul className="space-y-2">
-                {products.map((product) => (
-                  <li key={product.slug}>
-                    <Link to={`/products/${product.slug}`} className={linkClasses}>
-                      {product.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </>
-          ) : null}
         </nav>
 
         {hasContact ? (
@@ -59,11 +46,11 @@ export function Footer() {
                   </a>
                 </li>
               ))}
-              {site.email ? (
+              {email ? (
                 <li className="flex items-center gap-2">
                   <Icon name="mail" />
-                  <a href={`mailto:${site.email}`} className={linkClasses}>
-                    {site.email}
+                  <a href={`mailto:${email}`} className={linkClasses}>
+                    {email}
                   </a>
                 </li>
               ) : null}
