@@ -1,8 +1,10 @@
 import { ContactItem } from '@/components/sections/ContactItem'
 import { Seo } from '@/components/seo/Seo'
+import { PageHero } from '@/components/ui/PageHero'
 import { Section } from '@/components/ui/Section'
-import { SectionHeading } from '@/components/ui/SectionHeading'
 import { contactInfo, contactPage } from '@/content/contact'
+import { navigation } from '@/content/navigation'
+import { site } from '@/content/site'
 import { formatPhone, toTelHref } from '@/lib/format'
 import { useEmail } from '@/lib/useEmail'
 
@@ -15,18 +17,18 @@ export function ContactPage() {
   return (
     <>
       <Seo title={contactPage.seo.title} description={contactPage.seo.description} path="/contact" />
-      <Section background="alt">
-        <SectionHeading as="h1" title={contactPage.title} description={contactPage.description} />
+      <PageHero
+        title={contactPage.title}
+        description={contactPage.description}
+        breadcrumbLabel={site.breadcrumbLabel}
+        crumbs={[{ label: navigation[0].label, to: '/' }, { label: contactPage.seo.title }]}
+      />
+      <Section spacing="compact">
         {hasAny ? (
-          <ul className="mt-10 grid gap-4 md:grid-cols-2">
+          <ul className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {phones.map((phone) => (
               <li key={phone}>
-                <ContactItem
-                  icon="phone"
-                  label={labels.phone}
-                  value={formatPhone(phone)}
-                  href={toTelHref(phone)}
-                />
+                <ContactItem icon="phone" label={labels.phone} value={formatPhone(phone)} href={toTelHref(phone)} />
               </li>
             ))}
             {contactInfo.email ? (
@@ -47,7 +49,7 @@ export function ContactPage() {
             ) : null}
           </ul>
         ) : (
-          <p className="mt-10 text-lg text-muted">{contactPage.emptyMessage}</p>
+          <p className="text-lg text-muted">{contactPage.emptyMessage}</p>
         )}
       </Section>
     </>

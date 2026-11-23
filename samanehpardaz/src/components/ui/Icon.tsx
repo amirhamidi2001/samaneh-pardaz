@@ -11,6 +11,8 @@ export type IconName =
   | 'system'
   | 'support'
   | 'external'
+  | 'check'
+  | 'chevron'
 
 type IconProps = {
   name: IconName
@@ -19,12 +21,18 @@ type IconProps = {
   label?: string
 }
 
-// آیکون‌های جهت‌دار با نمای راست ترسیم شده‌اند و در RTL برعکس می‌شوند
-const directional: IconName[] = ['arrow', 'external']
+// آیکون‌های جهت‌دار با نمای راست ترسیم شده‌اند و در RTL برعکس می‌شوند.
+// داخل عنصر والدِ `group` در hover کمی به جهت خود حرکت می‌کنند.
+const directional: Partial<Record<IconName, string>> = {
+  arrow: 'rtl:-scale-x-100 transition-transform duration-200 group-hover:-translate-x-1',
+  external:
+    'rtl:-scale-x-100 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:-translate-x-0.5',
+  chevron: 'rtl:-scale-x-100',
+}
 
 const paths: Record<IconName, ReactNode> = {
   arrow: <path d="M5 12h14M13 6l6 6-6 6" />,
-  menu: <path d="M4 6h16M4 12h16M4 18h16" />,
+  menu: <path d="M4 7h16M4 12h16M4 17h16" />,
   close: <path d="M6 6l12 12M18 6L6 18" />,
   phone: (
     <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" />
@@ -60,10 +68,11 @@ const paths: Record<IconName, ReactNode> = {
   external: (
     <path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
   ),
+  check: <path d="M5 12.5l4.5 4.5L19 7.5" />,
+  chevron: <path d="M9 5l7 7-7 7" />,
 }
 
 export function Icon({ name, className = 'size-5', label }: IconProps) {
-  const flip = directional.includes(name) ? 'rtl:-scale-x-100' : ''
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -73,10 +82,8 @@ export function Icon({ name, className = 'size-5', label }: IconProps) {
       strokeWidth={1.75}
       strokeLinecap="round"
       strokeLinejoin="round"
-      className={`shrink-0 ${flip} ${className}`}
-      {...(label
-        ? { role: 'img', 'aria-label': label }
-        : { 'aria-hidden': true, focusable: 'false' })}
+      className={`shrink-0 ${directional[name] ?? ''} ${className}`}
+      {...(label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': true, focusable: 'false' })}
     >
       {paths[name]}
     </svg>

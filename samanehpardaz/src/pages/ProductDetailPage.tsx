@@ -5,7 +5,9 @@ import { ProductHero } from '@/components/sections/ProductHero'
 import { ProductOverview } from '@/components/sections/ProductOverview'
 import { ProductSteps } from '@/components/sections/ProductSteps'
 import { Seo } from '@/components/seo/Seo'
-import { getProductBySlug, productCta, productLabels } from '@/content/products'
+import { navigation } from '@/content/navigation'
+import { getProductBySlug, productCta, productLabels, productsPage } from '@/content/products'
+import { site } from '@/content/site'
 import { NotFoundPage } from './NotFoundPage'
 
 export function ProductDetailPage() {
@@ -22,6 +24,12 @@ export function ProductDetailPage() {
         byCompanyLabel={productLabels.byCompany}
         statusLabel={productLabels.status[product.status]}
         visitLabel={`${productLabels.visitSitePrefix} ${product.name}`}
+        breadcrumbLabel={site.breadcrumbLabel}
+        crumbs={[
+          { label: navigation[0].label, to: '/' },
+          { label: productsPage.seo.title, to: '/products' },
+          { label: product.name },
+        ]}
       />
       <ProductOverview
         aboutTitle={productLabels.aboutTitle}

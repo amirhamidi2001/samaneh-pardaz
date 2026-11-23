@@ -10,13 +10,21 @@ type SectionProps = {
   className?: string
   /** برای بخش‌هایی که خودشان Container می‌خواهند false بدهید */
   contained?: boolean
+  /** فاصله عمودی: default (بخش اصلی)، compact (هدر صفحات داخلی)، none */
+  spacing?: 'default' | 'compact' | 'none'
   'aria-labelledby'?: string
 }
 
 const backgrounds: Record<SectionBackground, string> = {
-  default: 'bg-surface text-brand',
-  alt: 'bg-surface-alt text-brand',
-  brand: 'bg-brand text-white',
+  default: 'bg-white text-brand',
+  alt: 'bg-mist-50 text-brand',
+  brand: 'bg-navy-950 text-white on-dark',
+}
+
+const spacings = {
+  default: 'py-20 md:py-28',
+  compact: 'py-16 md:py-24',
+  none: '',
 }
 
 export function Section({
@@ -25,13 +33,14 @@ export function Section({
   id,
   className = '',
   contained = true,
+  spacing = 'default',
   'aria-labelledby': labelledBy,
 }: SectionProps) {
   return (
     <section
       id={id}
       aria-labelledby={labelledBy}
-      className={`py-16 md:py-24 ${backgrounds[background]} ${className}`}
+      className={`${spacings[spacing]} ${backgrounds[background]} ${className}`}
     >
       {contained ? <Container>{children}</Container> : children}
     </section>

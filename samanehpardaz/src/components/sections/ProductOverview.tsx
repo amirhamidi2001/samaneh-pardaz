@@ -1,4 +1,5 @@
 import { Card } from '@/components/ui/Card'
+import { Icon } from '@/components/ui/Icon'
 import { Section } from '@/components/ui/Section'
 
 type ProductOverviewProps = {
@@ -13,22 +14,24 @@ export function ProductOverview({ aboutTitle, summary, audienceTitle, audience }
 
   return (
     <Section aria-labelledby="product-about-heading">
-      <div className={hasAudience ? 'grid gap-8 md:grid-cols-3' : ''}>
-        <div className="md:col-span-2">
-          <h2 id="product-about-heading" className="text-2xl font-bold md:text-3xl">
+      <div className={hasAudience ? 'grid gap-10 lg:grid-cols-3 lg:gap-14' : ''}>
+        <div className="lg:col-span-2">
+          <h2 id="product-about-heading" className="text-3xl font-extrabold leading-[1.4] md:text-4xl">
             {aboutTitle}
           </h2>
-          <p className="mt-4 max-w-3xl text-muted md:text-lg">{summary}</p>
+          <p className="mt-6 max-w-3xl text-lg leading-9 text-muted md:text-xl md:leading-10">{summary}</p>
         </div>
         {hasAudience ? (
-          <Card as="div" aria-labelledby="product-audience-heading">
+          <Card as="div" tone="tint" aria-labelledby="product-audience-heading" className="reveal self-start">
             <h2 id="product-audience-heading" className="text-xl font-bold">
               {audienceTitle}
             </h2>
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-5 space-y-4">
               {audience.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-muted">
-                  <span aria-hidden="true" className="mt-3 size-2 shrink-0 rounded-full bg-accent" />
+                <li key={item} className="flex items-start gap-3 leading-8 text-muted">
+                  <span className="mt-1 inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-accent text-white">
+                    <Icon name="check" className="size-3.5" />
+                  </span>
                   <span>{item}</span>
                 </li>
               ))}

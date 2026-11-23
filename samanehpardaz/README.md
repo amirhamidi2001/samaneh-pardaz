@@ -40,6 +40,10 @@ The website currently presents these areas:
 
 The website's product page introduces its audience, key features, and the steps for getting started.
 
+## Design system
+
+Colors, typography, spacing, motion rules and component ownership are documented in [`DESIGN_SPEC.md`](DESIGN_SPEC.md). Design tokens live in `src/index.css` (`@theme`).
+
 ## Technology stack
 
 - **React 19** — UI library

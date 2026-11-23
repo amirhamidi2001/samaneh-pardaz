@@ -7,6 +7,13 @@ type SectionHeadingProps = {
   id?: string
   /** برای استفاده روی پس‌زمینه تیره */
   inverted?: boolean
+  className?: string
+}
+
+const sizes = {
+  h1: 'text-4xl leading-[1.35] sm:text-5xl lg:text-[3.5rem]',
+  h2: 'text-3xl leading-[1.4] md:text-4xl',
+  h3: 'text-2xl leading-[1.4]',
 }
 
 export function SectionHeading({
@@ -16,19 +23,21 @@ export function SectionHeading({
   as: Tag = 'h2',
   id,
   inverted = false,
+  className = '',
 }: SectionHeadingProps) {
   const alignment = align === 'center' ? 'mx-auto text-center' : 'text-start'
-  const titleSize = Tag === 'h1' ? 'text-3xl md:text-5xl' : 'text-2xl md:text-4xl'
   const titleColor = inverted ? 'text-white' : 'text-brand'
-  const descColor = inverted ? 'text-slate-300' : 'text-muted'
+  const descColor = inverted ? 'text-mist-300' : 'text-muted'
 
   return (
-    <div className={`max-w-3xl ${alignment}`}>
-      <Tag id={id} className={`${titleSize} ${titleColor} font-bold leading-tight`}>
+    <div className={`max-w-3xl ${alignment} ${className}`}>
+      <Tag id={id} className={`${sizes[Tag]} ${titleColor} text-balance font-extrabold`}>
         {title}
       </Tag>
       {description ? (
-        <p className={`mt-4 text-base md:text-lg ${descColor}`}>{description}</p>
+        <p className={`mt-5 max-w-2xl text-base leading-8 md:text-lg md:leading-9 ${descColor} ${align === 'center' ? 'mx-auto' : ''}`}>
+          {description}
+        </p>
       ) : null}
     </div>
   )
