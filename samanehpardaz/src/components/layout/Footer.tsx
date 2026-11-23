@@ -31,20 +31,6 @@ export function Footer() {
               </li>
             ))}
           </ul>
-          {products.length > 0 ? (
-            <>
-              <h2 className={`${titleClasses} mt-8`}>{site.footer.productsTitle}</h2>
-              <ul className="space-y-2">
-                {products.map((product) => (
-                  <li key={product.slug}>
-                    <Link to={`/products/${product.slug}`} className={linkClasses}>
-                      {product.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </>
-          ) : null}
         </nav>
 
         {hasContact ? (
