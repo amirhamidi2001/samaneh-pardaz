@@ -17,6 +17,7 @@ function buildOrganization() {
     '@type': 'Organization',
     name: site.name,
     url: site.siteUrl,
+    ...(site.email ? { email: site.email } : {}),
     ...(site.phones.length > 0
       ? { telephone: site.phones.map((phone) => `+98${phone.replace(/^0/, '')}`) }
       : {}),
