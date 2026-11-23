@@ -13,14 +13,14 @@
 @theme {
   --font-sans: "Vazirmatn", ui-sans-serif, system-ui, "Segoe UI", Tahoma, sans-serif;
 
-  --color-brand: #0f172a;
-  --color-accent: #0e7490;
-  --color-accent-strong: #155e75;
-  --color-accent-soft: #ecfeff;
-  --color-surface: #ffffff;
+  --color-brand: #020617;
+  --color-accent: #082f49;
+  --color-accent-strong: #0c4a6e;
+  --color-accent-soft: #e0f2fe;
+  --color-surface: #f0f9ff;
   --color-surface-alt: #f8fafc;
-  --color-muted: #475569;
-  --color-border: #e2e8f0;
+  --color-muted: #0c0a09;
+  --color-border: #bae6fd;
 
   --radius-card: 1rem;
   --radius-control: 0.75rem;
