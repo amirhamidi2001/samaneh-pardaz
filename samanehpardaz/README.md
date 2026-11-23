@@ -33,7 +33,7 @@ React + Vite + TypeScript + Tailwind CSS 4 + react-router-dom 6 + vite-react-ssg
 
 | فایل | توضیح |
 |---|---|
-| `public/favicon.svg` | وقتی اضافه شود، لینک favicon خودکار در `<head>` همه صفحات می‌آید. بدون آن مرورگر `/favicon.ico` را می‌خواهد و ۴۰۴ می‌گیرد (امتیاز Best Practices لایت‌هاوس ۹۶ می‌ماند، با favicon برابر ۱۰۰ است). |
+| `public/favicon.svg` | وقتی اضافه شود، لینک favicon خودکار در `<head>` همه صفحات می‌آید. تا آن موقع یک favicon خالی گذاشته می‌شود (تب مرورگر بدون آیکون) تا مرورگر `/favicon.ico` را نخواهد و خطای ۴۰۴ در کنسول نبیند. |
 | `public/og-image.png` | تصویر پیش‌نمایش اشتراک‌گذاری، ۱۲۰۰×۶۳۰. وقتی اضافه شود `og:image` و `twitter:image` خودکار ساخته می‌شود. |
 | `public/brand/logo-company.svg` | سپس در `src/content/site.ts` مقدار `logo` را به `'/brand/logo-company.svg'` تغییر دهید. |
 | `public/brand/logo-hirbad.svg` | سپس در `src/content/products.ts` برای هیربد `logo: '/brand/logo-hirbad.svg'` بگذارید. |
