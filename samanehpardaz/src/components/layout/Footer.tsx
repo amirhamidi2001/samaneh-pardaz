@@ -3,7 +3,6 @@ import { Container } from '@/components/ui/Container'
 import { Icon } from '@/components/ui/Icon'
 import { Logo } from '@/components/ui/Logo'
 import { navigation } from '@/content/navigation'
-import { products } from '@/content/products'
 import { site } from '@/content/site'
 import { formatCopyright, formatPhone, toTelHref } from '@/lib/format'
 
@@ -31,20 +30,6 @@ export function Footer() {
               </li>
             ))}
           </ul>
-          {products.length > 0 ? (
-            <>
-              <h2 className={`${titleClasses} mt-8`}>{site.footer.productsTitle}</h2>
-              <ul className="space-y-2">
-                {products.map((product) => (
-                  <li key={product.slug}>
-                    <Link to={`/products/${product.slug}`} className={linkClasses}>
-                      {product.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </>
-          ) : null}
         </nav>
 
         {hasContact ? (

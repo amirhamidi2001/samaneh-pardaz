@@ -66,8 +66,7 @@ export const products: Product[] = [
       { title: 'شروع یادگیری', description: 'مسیر یادگیری را با اطمینان آغاز کنید.' },
     ],
     externalUrl: 'https://hirbad.com',
-    // بعد از افزودن فایل به public/brand/ مقدار را به '/brand/logo-hirbad.svg' تغییر دهید
-    logo: null,
+    logo: '/brand/logo-hirbad.webp',
     status: 'active',
     featured: true,
   },

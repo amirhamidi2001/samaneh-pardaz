@@ -20,16 +20,17 @@ export default defineConfig({
     tailwindcss(),
     {
       name: 'optional-favicon',
-      transformIndexHtml: () =>
-        hasFavicon
-          ? [
-              {
-                tag: 'link',
-                attrs: { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
-                injectTo: 'head',
-              },
-            ]
-          : [],
+      // بدون favicon مرورگر خودکار /favicon.ico را می‌خواهد و ۴۰۴ در کنسول می‌بیند؛
+      // پس تا وقتی مالک فایل را نگذاشته، یک favicon خالی (بدون درخواست شبکه) می‌گذاریم
+      transformIndexHtml: () => [
+        {
+          tag: 'link',
+          attrs: hasFavicon
+            ? { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }
+            : { rel: 'icon', href: 'data:,' },
+          injectTo: 'head',
+        },
+      ],
     },
   ],
   define: {
