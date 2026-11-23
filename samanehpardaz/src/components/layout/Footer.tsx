@@ -3,7 +3,6 @@ import { Container } from '@/components/ui/Container'
 import { Icon } from '@/components/ui/Icon'
 import { Logo } from '@/components/ui/Logo'
 import { navigation } from '@/content/navigation'
-import { products } from '@/content/products'
 import { site } from '@/content/site'
 import { formatCopyright, formatPhone, toTelHref } from '@/lib/format'
 
