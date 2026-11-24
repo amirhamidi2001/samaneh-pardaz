@@ -4,7 +4,8 @@ export const site: SiteConfig = {
   name: 'سامانه پرداز ایرانیان جوان',
   siteUrl: 'https://samanehpardaz.vercel.app',
   phones: ['09021944825', '09102441937'],
-  email: 'hirbadplatform@gmail.com',
+  // به‌صورت base64 نگه‌داری می‌شود تا آدرس به‌شکل متن ساده در باندل جاوااسکریپت نباشد (ضد جمع‌آوری ایمیل)
+  email: atob('aGlyYmFkcGxhdGZvcm1AZ21haWwuY29t'),
   region: 'استان تهران',
   addressRegion: 'تهران',
   addressCountry: 'IR',

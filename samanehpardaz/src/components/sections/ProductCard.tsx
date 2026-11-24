@@ -27,7 +27,7 @@ export function ProductCard({ product, statusLabel, viewDetailsLabel }: ProductC
           aria-hidden="true"
           className="inline-flex size-28 shrink-0 items-center justify-center self-start rounded-[1.5rem] bg-mist-50 p-3 ring-1 ring-inset ring-border md:size-32"
         >
-          <Logo src={product.logo} name={product.name} size={96} lazy decorative />
+          <Logo src={product.logo} name={product.name} size={96} lazy />
         </span>
       ) : null}
       <div className="flex-1">

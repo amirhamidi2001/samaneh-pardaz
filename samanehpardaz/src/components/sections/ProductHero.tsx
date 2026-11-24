@@ -34,7 +34,7 @@ export function ProductHero({
       <Container className="py-14 md:py-20">
         <Breadcrumbs label={breadcrumbLabel} items={crumbs} inverted />
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto] lg:gap-16">
-          <div className="animate-rise">
+          <div>
             <div className="mb-6 flex flex-wrap items-center gap-3">
               <Badge variant="light">{byCompanyLabel}</Badge>
               <Badge variant="light">{statusLabel}</Badge>
