@@ -26,9 +26,9 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-border/80 bg-white/85 backdrop-blur-xl supports-[backdrop-filter]:bg-white/75">
       <Container className="flex h-[4.5rem] items-center justify-between gap-4">
         <Link to="/" className="inline-flex items-center gap-3">
-          <Logo src={site.logo} name={site.name} size={40} decorative />
+          <Logo src={site.logo} name={site.name} size={40} />
           {site.logo ? (
-            <span className="text-[0.95rem] font-extrabold leading-tight text-brand sm:text-base">{site.name}</span>
+            <span aria-hidden="true" className="text-[0.95rem] font-extrabold leading-tight text-brand sm:text-base">{site.name}</span>
           ) : null}
         </Link>
         <nav aria-label="ناوبری اصلی" className="hidden md:block">

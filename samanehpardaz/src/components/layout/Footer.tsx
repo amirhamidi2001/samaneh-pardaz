@@ -26,7 +26,7 @@ export function Footer() {
         <div className="max-w-xs">
           <div className="flex items-center gap-3">
             <LogoTile src={site.logo} name={site.name} size={40} lazy tileClassName="p-2" />
-            <span className="font-extrabold leading-tight text-white">{site.name}</span>
+            <span aria-hidden="true" className="font-extrabold leading-tight text-white">{site.name}</span>
           </div>
           <p className="mt-5 leading-8">{about.description}</p>
         </div>

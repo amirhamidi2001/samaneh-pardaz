@@ -55,7 +55,7 @@ function HeroDiagram({ nodes }: { nodes: IconName[] }) {
       <div
         className="animate-pop absolute left-1/2 top-1/2 grid size-28 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-[1.75rem] bg-white shadow-[0_24px_70px_-12px_rgb(31_79_216/0.65)] ring-8 ring-white/10 [animation-delay:350ms] sm:size-32"
       >
-        {site.logo ? <Logo src={site.logo} name={site.name} size={72} decorative /> : null}
+        {site.logo ? <Logo src={site.logo} name={site.name} size={72} /> : null}
       </div>
 
       {items.map((icon, index) => (
@@ -87,9 +87,7 @@ export function Hero({ title, description, primaryCta, secondaryCta, nodes = [] 
 
       <Container className="grid items-center gap-14 py-16 md:py-24 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:py-32">
         <div>
-          <div className="animate-rise">
-            <SectionHeading as="h1" title={title} description={description} inverted />
-          </div>
+          <SectionHeading as="h1" title={title} description={description} inverted />
           <div className="animate-rise mt-10 flex flex-wrap gap-3 [animation-delay:150ms]">
             <Button to={primaryCta.to} variant="inverse">
               {primaryCta.label}
